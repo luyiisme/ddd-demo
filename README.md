@@ -1,0 +1,4 @@
+- bootstrap 依赖 ${biz-module}-interfaces;
+- biz module 数据源独立；
+- biz module 通过 interface-facade 相互调用；
+- interface 可选包括 web package;

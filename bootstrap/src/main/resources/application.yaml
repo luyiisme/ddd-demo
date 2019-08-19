@@ -1,0 +1,12 @@
+spring:
+  datasource:
+          user:
+            username: sa
+            password:
+            jdbcUrl: jdbc:h2:mem:test_user
+            driverClassName: org.h2.Driver
+          order:
+            username: sa
+            password:
+            jdbcUrl: jdbc:h2:mem:test_order
+            driverClassName: org.h2.Driver
