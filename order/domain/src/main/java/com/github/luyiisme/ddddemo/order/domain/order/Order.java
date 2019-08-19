@@ -1,21 +1,22 @@
 package com.github.luyiisme.ddddemo.order.domain.order;
 
+import com.github.luyiisme.ddddemo.order.infra.dao.model.OrderDO;
+import com.github.luyiisme.ddddemo.order.domain.valueobject.User;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author: kevin.luy@antfin.com
- * @create: 2019-08-18 20:47
+ * @create: 2019-08-19 20:25
  **/
 @Data
 public class Order {
     private long id;
     private String orderNo;
-    //who's
-    private long userId;
+    private User user;
     private Status status;
-
-
-
+    private List<LineItem> lineItems;
 
     public static enum Status {
 
@@ -25,23 +26,24 @@ public class Order {
         PAYMENT_EXPECTED,
 
         /**
-         * {@link Order} was payed. No changes allowed to it anymore.
+         * {@link OrderDO} was payed. No changes allowed to it anymore.
          */
         PAID,
 
         /**
-         * The {@link Order} is currently processed.
+         * The {@link OrderDO} is currently processed.
          */
         PREPARING,
 
         /**
-         * The {@link Order} is ready to be picked up by the customer.
+         * The {@link OrderDO} is ready to be picked up by the customer.
          */
         READY,
 
         /**
-         * The {@link Order} was completed.
+         * The {@link OrderDO} was completed.
          */
         TAKEN;
     }
+
 }

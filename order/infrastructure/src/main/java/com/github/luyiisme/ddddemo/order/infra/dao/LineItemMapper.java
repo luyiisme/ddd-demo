@@ -1,6 +1,6 @@
-package com.github.luyiisme.ddddemo.order.domain.mapper;
+package com.github.luyiisme.ddddemo.order.infra.dao;
 
-import com.github.luyiisme.ddddemo.order.domain.order.LineItem;
+import com.github.luyiisme.ddddemo.order.infra.dao.model.LineItemDO;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -18,5 +18,5 @@ public interface LineItemMapper {
             @Result(property = "orderId", column = "order_id"),
             @Result(property = "productId", column = "product_id")
     })
-    List<LineItem> getList(int orderId);
+    List<LineItemDO> getList(int orderId);
 }

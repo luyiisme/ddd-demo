@@ -1,10 +1,12 @@
 package com.github.luyiisme.ddddemo.order.interfaces.web;
 
-import com.github.luyiisme.ddddemo.order.domain.mapper.LineItemMapper;
-import com.github.luyiisme.ddddemo.order.domain.mapper.OrderMapper;
-import com.github.luyiisme.ddddemo.order.domain.mapper.ProductMapper;
-import com.github.luyiisme.ddddemo.order.domain.order.LineItem;
+import com.github.luyiisme.ddddemo.order.domain.OrderRepository;
 import com.github.luyiisme.ddddemo.order.domain.order.Order;
+import com.github.luyiisme.ddddemo.order.infra.dao.LineItemMapper;
+import com.github.luyiisme.ddddemo.order.infra.dao.OrderMapper;
+import com.github.luyiisme.ddddemo.order.infra.dao.ProductMapper;
+import com.github.luyiisme.ddddemo.order.infra.dao.model.LineItemDO;
+import com.github.luyiisme.ddddemo.order.infra.dao.model.OrderDO;
 import com.github.luyiisme.ddddemo.order.interfaces.dto.OrderDTO;
 import com.github.luyiisme.ddddemo.user.interfaces.facade.UserFacade;
 import com.github.luyiisme.ddddemo.user.interfaces.facade.dto.UserDTO;
@@ -26,30 +28,23 @@ public class OrderController {
     @Autowired
     private UserFacade userFacade;
     @Autowired
-    private OrderMapper orderMapper;
-    @Autowired
-    private LineItemMapper lineItemMapper;
-    @Autowired
-    private ProductMapper productMapper;
+    private OrderRepository orderRepository;
 
 
     @GetMapping("/users/{userName}/orders")
     public String getOrders(@PathVariable("userName") String name) {
         UserDTO dto = userFacade.getUserByName(name);
-        List<Order> orders = orderMapper.getOrdersByUserId(dto.getId());
+        Order order= orderRepository.getById(1);
 
-        return orders.stream().map(order -> {
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setUserName(dto.getName());
-            List<LineItem> items = lineItemMapper.getList(1);
+            List<LineItemDO> items = lineItemMapper.getList(1);
             orderDTO.setItems(items.stream().map(transfer2LineItemDTO()).collect(Collectors.toList()));
-
-            return orderDTO;
-        }).collect(Collectors.toList()).toString();
+            return orderDTO.toString();
 
     }
 
-    private Function<LineItem, OrderDTO.LineItemDTO> transfer2LineItemDTO() {
+    private Function<LineItemDO, OrderDTO.LineItemDTO> transfer2LineItemDTO() {
         return li -> {
             OrderDTO.LineItemDTO lineItemDTO = new OrderDTO.LineItemDTO();
             lineItemDTO.setName(li.getName());

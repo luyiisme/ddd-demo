@@ -25,7 +25,7 @@ import java.util.Arrays;
  **/
 @Configuration
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
-@MapperScan(basePackages = "com.github.luyiisme.ddddemo.order.domain.mapper",
+@MapperScan(basePackages = "com.github.luyiisme.ddddemo.order.infra.dao",
         sqlSessionTemplateRef = "orderSqlSessionTemplate")
 public class OrderPersistenceConfig {
 

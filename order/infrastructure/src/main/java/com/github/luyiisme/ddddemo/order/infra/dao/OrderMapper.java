@@ -1,7 +1,7 @@
-package com.github.luyiisme.ddddemo.order.domain.mapper;
+package com.github.luyiisme.ddddemo.order.infra.dao;
 
 
-import com.github.luyiisme.ddddemo.order.domain.order.Order;
+import com.github.luyiisme.ddddemo.order.infra.dao.model.OrderDO;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -15,12 +15,19 @@ import java.util.List;
 public interface OrderMapper {
 
     @Select("SELECT * FROM torder")
-    List<Order> getList();
+    List<OrderDO> getList();
 
     @Select("SELECT * FROM torder where user_id=#{userId}")
     @Results(value = {
             @Result(property = "orderNo", column = "order_no"),
             @Result(property = "userId", column = "user_id")
             })
-    List<Order> getOrdersByUserId(long userId);
+    List<OrderDO> getOrdersByUserId(long userId);
+
+    @Select("SELECT * FROM torder where id=#{id}")
+    @Results(value = {
+            @Result(property = "orderNo", column = "order_no"),
+            @Result(property = "userId", column = "user_id")
+    })
+    OrderDO getById(long id);
 }

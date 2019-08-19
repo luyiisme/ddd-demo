@@ -1,6 +1,6 @@
-package com.github.luyiisme.ddddemo.order.domain.mapper;
+package com.github.luyiisme.ddddemo.order.infra.dao;
 
-import com.github.luyiisme.ddddemo.order.domain.order.Product;
+import com.github.luyiisme.ddddemo.order.infra.dao.model.ProductDO;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Select;
 public interface ProductMapper {
 
     @Select("SELECT * FROM product where id=#{id}")
-    Product getById(long id);
+    ProductDO getById(long id);
 
 }
